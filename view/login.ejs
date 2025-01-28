@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body{
+            background-color: rgb(10, 26, 37);
+            color: aliceblue;
+            text-decoration: aliceblue;
+        }
+        
+        
+    </style>
+</head>
+<body>
+
+    <div class="d1">
+        <h1>URL Shortener Project</h1>
+        <h3>Log in</h3>
+
+    <form action="/logged" method="post">
+
+        <% if (locals.msg) { %>
+         <h4><%= msg %></h4>
+        <% } %>
+
+        <label for="email">Email :</label>
+        <input type="text" name="email" id="email" required>
+
+        <label for="pass">Password : </label>
+        <input type="password" name="pass" id="pass" required>
+        <button>Submit</button>
+
+    </form>
+    </div>
+    
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <style>
+        body{
+            background-color: rgb(10, 26, 37);
+            color: aliceblue;
+            text-decoration: aliceblue;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>URL Shortener</h1>
+
+    <form action="/generate" method="post">
+
+    <label for="url">URL : </label>
+    <input type="text" id="url" name="redirectUrl">
+    <button>Generate</button>
+
+    </form>
+    
+
+    <% if (locals.allurl) { %>
+     <table>
+        
+        <thead>
+            <tr>
+                <th>Sr.No</th>
+                <th>Oringnal URL</th>
+                <th>Short URL</th>
+                <th>Created By</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% allurl.forEach(url,i => { %>
+                <tr>
+                    <td>i+1</td>
+                    <td>url.redirectUrl</td>
+                    <td>url.shortUrl</td>
+                    <td>url.createdBy</td>
+                </tr>
+            <% }) %>
+        </tbody>
+
+     </table>
+    <% } %>
+    <% if (!locals.allurl) { %>
+        <h3>No Urls available ..</h3>
+    <% } %>     
+
+
+</body>
+</html>
