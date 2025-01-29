@@ -5,7 +5,7 @@ const jwt  = require("jsonwebtoken");
 const Cookies = require("cookies");
 const {getuser,setuser}=require("../service/auth")
 
-function handlerhome(req,res)
+async function handlerhome(req,res)
 {
     res.redirect("/home");
 }
@@ -93,16 +93,31 @@ async function handlegenerate(req,res)
         createdBy:per._id
     }).then(()=>{
         console.log("\n Entry added in url DB")
-        res.status(200).json(short)
+        res.status(200).render("home",{
+            sh:short
+        })
     }).catch((err)=>{
         console.log("Error for adding in url DB ",err)
         res.status(400).send("something wrong");
     });
 }
 
-function staichandle(req,res)
+async function staichandle(req,res)
 {
-    res.render("home");
+    const tok=req.cookies?.id;
+    const per= getuser(tok);
+
+    const us=await user.findOne({email:per.email,pass:per.passowrd})
+    const uname=us.uname;
+    const allurl=await url.find({createdBy:us._id});
+    if(allurl[0]!=null)
+    res.render("home",{
+        allurl,uname
+    });
+    else
+    {
+        res.render("home");
+    }
 }
 
 async function handlershort(req,res)
